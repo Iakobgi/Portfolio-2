@@ -931,9 +931,7 @@ function isValidEmail(value) {
 }
 
 if (contactForm) {
-    contactForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
+    contactForm.addEventListener("submit", (event) => {
         const copy = portfolioData?.ui?.contactForm || {};
         const firstName = formFirstNameInput?.value.trim() || "";
         const lastName = formLastNameInput?.value.trim() || "";
@@ -949,38 +947,25 @@ if (contactForm) {
         markFieldError(formMessageInput, !message);
 
         if (missing) {
+            event.preventDefault();
             setFormStatus(copy.error || "Please fill in every required field before sending.", "error");
             return;
         }
 
         if (!isValidEmail(email)) {
+            event.preventDefault();
             markFieldError(formEmailInput, true);
             setFormStatus(copy.errorInvalidEmail || "Please enter a valid email address.", "error");
             return;
         }
 
+        // Validation passed: do not preventDefault. Let the browser submit the
+        // form natively so Netlify can intercept and process it server-side,
+        // then redirect to the form's `action` (thank-you.html). This avoids
+        // every AJAX/fetch-related failure mode (redirect rules, content-type
+        // quirks, etc.) that can break Netlify Forms on a live deployment.
         if (formSubmit) formSubmit.disabled = true;
         setFormStatus(copy.sending || "Sending…", "");
-
-        const formData = new FormData(contactForm);
-
-        try {
-            const response = await fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            });
-
-            if (!response.ok) throw new Error("Netlify form submission failed");
-
-            setFormStatus(copy.success || "Thanks! Your message has been sent.", "success");
-            contactForm.reset();
-        } catch (error) {
-            console.error("Contact form error:", error);
-            setFormStatus(copy.error || "Something went wrong. Please try again or email me directly.", "error");
-        } finally {
-            if (formSubmit) formSubmit.disabled = false;
-        }
     });
 
     [

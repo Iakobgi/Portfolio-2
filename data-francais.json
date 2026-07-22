@@ -180,7 +180,7 @@
     "Cinéma"
   ],
   "ui": {
-    "siteTitle": "Iakobi Iakobashvili | Développeur Junior",
+    "siteTitle": "Iakobi Iakobashvili - Développeur Junior",
     "logo": "Mon Portfolio",
     "nav": {
       "home": "Accueil",
@@ -262,6 +262,13 @@
       "preferredLabel": "Contact préféré",
       "preferredValue": "Email ou LinkedIn",
       "backHome": "Retour à l'accueil"
+    },
+    "thankYouPage": {
+      "eyebrow": "Message envoyé",
+      "title": "Merci, c'est bien reçu !",
+      "subtitle": "Votre message a bien été reçu. Je vous répondrai dès que possible, généralement sous 24h.",
+      "backHome": "Retour à l'accueil",
+      "backContact": "Envoyer un autre message"
     },
     "chatbot": {
       "title": "Assistant Portfolio",
