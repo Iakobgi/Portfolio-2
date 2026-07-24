@@ -8,12 +8,12 @@
     "linkedin": "https://www.linkedin.com/in/iakobi-iakobashvili-b157a9230",
     "github": "https://github.com/Iakobgi",
     "portfolio": "https://iakobgi.github.io/portfolio/",
-    "summary": "Développeur junior à la recherche d'une alternance de 12 mois à partir de septembre 2026, axé sur l'intelligence artificielle, DevOps et le développement full-stack.",
+    "summary": "Développeur junior à la recherche d'une alternance de 12 mois à partir de novembre 2026, axé sur l'intelligence artificielle, DevOps et le développement full-stack.",
     "myself": "Je m'appelle Iakobi Iakobashvili, j'ai 24 ans et je suis un développeur junior spécialisé en développement Full-Stack, DevOps et Intelligence Artificielle."
   },
   "apprenticeship": {
-    "status": "Actuellement à la recherche d'une alternance de 12 mois en tant que développeur junior à partir de septembre 2026.",
-    "availability": "Disponible pour la rentrée 2026",
+    "status": "Actuellement à la recherche d'une alternance de 12 mois en tant que développeur junior à partir de novembre 2026.",
+    "availability": "Disponible pour la rentrée de novembre 2026",
     "goals": "Je recherche une entreprise dans laquelle je pourrai mettre à profit mes compétences et mes connaissances sur des projets concrets, continuer à apprendre au sein d'une équipe et valider ma troisième année de Bachelor en développement web, applicatif, IA et DevOps."
   },
   "skills": {
@@ -152,7 +152,7 @@
     },
     {
       "name": "Tableau de bord d’automatisation SEO/GEO piloté par l’IA",
-      "shortDescription": "Projet à venir — tableau de bord d’automatisation SEO/GEO piloté par l’IA.",
+      "shortDescription": "Projet à venir - tableau de bord d’automatisation SEO/GEO piloté par l’IA.",
       "description": "Projet à venir : un tableau de bord d’automatisation SEO/GEO piloté par l’IA, actuellement en préparation pour une mise en ligne prochaine.",
       "technologies": [
         "IA",
@@ -231,7 +231,7 @@
     "contact": {
       "eyebrow": "Contact",
       "title": "Restons en contact",
-      "subtitle": "Moyens rapides pour me contacter",
+      "subtitle": "Moyens rapides pour me contacter - ou utilisez le formulaire sur la page dédiée.",
       "linkedin": "Mon LinkedIn",
       "formCta": "Ouvrir le formulaire de contact"
     },
@@ -255,12 +255,12 @@
     "contactPage": {
       "eyebrow": "Contact",
       "title": "Construisons quelque chose",
-      "subtitle": "Un projet, une opportunité, ou juste envie de dire bonjour ? Remplissez le formulaire ou contactez-moi directement.",
+      "subtitle": "Un projet, une opportunité, ou juste envie de dire bonjour ? Remplissez le formulaire ci-dessous ou contactez-moi directement par email ou LinkedIn.",
       "cardTitle": "contact_card.json",
       "responseTimeLabel": "Temps de réponse",
       "responseTimeValue": "Généralement sous 24h",
       "preferredLabel": "Contact préféré",
-      "preferredValue": "Email ou LinkedIn",
+      "preferredValue": "Email ou formulaire du site",
       "backHome": "Retour à l'accueil"
     },
     "thankYouPage": {
@@ -320,7 +320,8 @@
       "technologies": "JavaScript, intégration d’API, HTML, CSS, Python",
       "learnedTitle": "Statut",
       "learned": "Bientôt disponible. Ce projet est encore en cours de développement.",
-      "imageAlt": "Chatbot Personnel"    },
+      "imageAlt": "Chatbot Personnel"
+    },
     {
       "eyebrow": "Projet 04",
       "title": "RheinDevSys - Site Web Client",
@@ -331,6 +332,7 @@
       "technologies": "HTML, CSS, JavaScript, Design Responsive",
       "learnedTitle": "Ce que j'ai appris",
       "learned": "Communication avec le client et compréhension des besoins, normes professionnelles en conception web, implémentation de mise en page responsive, déploiement en production, et gestion des attentes du client tout au long du processus de développement.",
-      "imageAlt": "Site Web RheinDevSys"    }
+      "imageAlt": "Site Web RheinDevSys"
+    }
   ]
 }

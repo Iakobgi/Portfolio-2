@@ -70,9 +70,20 @@ const languageFiles = {
 
 if (menuToggle && navbar) {
     menuToggle.addEventListener("click", () => {
-        navbar.classList.toggle("active");
+        const isOpen = navbar.classList.toggle("active");
+        document.body.classList.toggle("menu-open", isOpen);
     });
 }
+
+document.addEventListener("click", (event) => {
+    if (!navbar || !navbar.classList.contains("active")) return;
+    const clickedInsideMenu = navbar.contains(event.target);
+    const clickedToggle = menuToggle && menuToggle.contains(event.target);
+    if (!clickedInsideMenu && !clickedToggle) {
+        navbar.classList.remove("active");
+        document.body.classList.remove("menu-open");
+    }
+});
 
 function applyTheme(theme) {
     if (theme === "light") {
@@ -93,6 +104,7 @@ if (themeToggle) {
 document.querySelectorAll(".navbar a").forEach((link) => {
     link.addEventListener("click", () => {
         if (navbar) navbar.classList.remove("active");
+        document.body.classList.remove("menu-open");
     });
 });
 
@@ -738,8 +750,10 @@ if (chatbotClose && chatbotWindow) {
     });
 }
 
+// FIX: Toast close button now only closes the toast, does not open chatbot
 if (chatbotToastClose) {
-    chatbotToastClose.addEventListener("click", () => {
+    chatbotToastClose.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent click from bubbling to the toast container
         hideChatbotHint();
         sessionStorage.setItem("chatbotHintDismissed", "true");
     });

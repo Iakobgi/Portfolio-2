@@ -8,12 +8,12 @@
     "linkedin": "https://www.linkedin.com/in/iakobi-iakobashvili-b157a9230",
     "github": "https://github.com/Iakobgi",
     "portfolio": "https://iakobgi.github.io/portfolio/",
-    "summary": "Junior developer looking for a 12-month apprenticeship starting in September 2026, focused on AI, DevOps and Full-Stack development.",
+    "summary": "Junior developer looking for a 12-month apprenticeship starting in November 2026, focused on AI, DevOps and Full-Stack development.",
     "myself": "My name is Iakobi Iakobashvili, I am 24 years old and I am a junior developer specialized in Full-Stack development, DevOps and Artificial Intelligence."
   },
   "apprenticeship": {
-    "status": "Currently looking for a 12-month apprenticeship as a junior developer starting in September 2026.",
-    "availability": "Available for the 2026 intake",
+    "status": "Currently looking for a 12-month apprenticeship as a junior developer starting in November 2026.",
+    "availability": "Available for the November 2026 intake",
     "goals": "Looking for a company where I can use my skills and knowledge to contribute to real projects that the company needs, continue learning in a supportive team, and validate the third year of the bachelor in web, app development, AI and DevOps."
   },
   "skills": {
@@ -231,7 +231,7 @@
     "contact": {
       "eyebrow": "Contact",
       "title": "Let’s connect",
-      "subtitle": "Quick ways to reach me",
+      "subtitle": "Quick ways to reach me - or use the contact form on the dedicated page.",
       "linkedin": "My LinkedIn",
       "formCta": "Open the contact form"
     },
@@ -247,7 +247,7 @@
       "message": "Message",
       "send": "Send message",
       "sending": "Sending…",
-      "success": "Thanks! Your message has been sent — I'll get back to you soon.",
+      "success": "Thanks! Your message has been sent - I'll get back to you soon.",
       "error": "Please fill in every required field before sending.",
       "errorInvalidEmail": "Please enter a valid email address.",
       "fallback": "Couldn't reach the server, so I opened your email app instead with your message pre-filled."
@@ -255,17 +255,17 @@
     "contactPage": {
       "eyebrow": "Contact",
       "title": "Let's build something",
-      "subtitle": "Have a project, an opportunity, or just want to say hi? Fill in the form or reach out directly.",
+      "subtitle": "Have a project, an opportunity, or just want to say hi? Fill in the form below or reach out directly via email or LinkedIn.",
       "cardTitle": "contact_card.json",
       "responseTimeLabel": "Response time",
       "responseTimeValue": "Usually within 24h",
       "preferredLabel": "Preferred contact",
-      "preferredValue": "Email or LinkedIn",
+      "preferredValue": "Email or the website form",
       "backHome": "Back to home"
     },
     "thankYouPage": {
       "eyebrow": "Message sent",
-      "title": "Thanks — got it!",
+      "title": "Thanks - got it!",
       "subtitle": "Your message has been received. I'll get back to you as soon as possible, usually within 24 hours.",
       "backHome": "Back to home",
       "backContact": "Send another message"
