@@ -363,6 +363,19 @@ footer {
   opacity: 0.45;
   transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
 }
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch screens: grow the tappable area around each flag to ~44px
+     (accessible tap-target size) without changing how big the flag looks */
+  .language-switcher {
+    gap: 0;
+    padding: 0 2px;
+  }
+  .language-switcher img {
+    box-sizing: content-box;
+    padding: 11px;
+  }
+}
 .language-switcher img:hover {
   transform: scale(1.1);
 }
@@ -475,6 +488,9 @@ html[data-theme="light"] .hero::before {
   grid-template-columns: 1.05fr 0.95fr;
   gap: 60px;
   align-items: center;
+}
+.hero-content > * {
+  min-width: 0;
 }
 
 .hero-badge {

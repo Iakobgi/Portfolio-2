@@ -480,7 +480,7 @@ function renderSkillsSection(skills, ui) {
             description: currentLanguage === "fr"
                 ? "Interfaces, frameworks UI et applications multiplateformes"
                 : "Interfaces, UI frameworks, and cross-platform apps",
-            skills: ["HTML/CSS", "JavaScript", "React", "Angular", "Flutter", "Dart", "UI/UX"]
+            skills: ["HTML/CSS", "JavaScript", "TypeScript", "React", "Angular", "Flutter", "Dart", "UI/UX"]
         },
         {
             id: "backend",

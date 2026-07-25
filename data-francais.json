@@ -13,7 +13,7 @@
   },
   "apprenticeship": {
     "status": "Actuellement à la recherche d'une alternance de 12 mois en tant que développeur junior à partir de novembre 2026.",
-    "availability": "Disponible pour la rentrée de novembre 2026",
+    "availability": "Disponible à partir de novembre 2026.",
     "goals": "Je recherche une entreprise dans laquelle je pourrai mettre à profit mes compétences et mes connaissances sur des projets concrets, continuer à apprendre au sein d'une équipe et valider ma troisième année de Bachelor en développement web, applicatif, IA et DevOps."
   },
   "skills": {
@@ -22,6 +22,7 @@
       "PHP",
       "SQL",
       "JavaScript",
+      "TypeScript",
       "C++",
       "Python",
       "Bash",
