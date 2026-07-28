@@ -622,7 +622,7 @@ function renderProjectCards(projects, ui) {
                 <span class="card-filename">${fileNames[index]}</span>
             </div>
             <div class="project-image-wrap">
-                <img src="${images[index]}" alt="${project.name}" />
+                <img src="${images[index]}" alt="${project.name}" loading="lazy" decoding="async" />
             </div>
             <div class="project-content">
                 <div class="project-tags">
@@ -650,7 +650,7 @@ function renderProjectCards(projects, ui) {
                 <span class="card-filename">${fileNames[4]}</span>
             </div>
             <div class="project-image-wrap">
-                <img src="${images[4]}" alt="${lockedProject.name}" />
+                <img src="${images[4]}" alt="${lockedProject.name}" loading="lazy" decoding="async" />
             </div>
             <div class="project-content">
                 <div class="project-tags">

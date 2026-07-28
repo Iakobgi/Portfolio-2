@@ -147,6 +147,8 @@ html[data-theme="light"] .skill.card:hover {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -158,6 +160,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  width: 100%;
+  overscroll-behavior-x: none;
 }
 
 img {
@@ -212,8 +216,15 @@ h4 {
 }
 
 /* ambient background */
-.background-blur {
+.background-blur-wrap {
   position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.background-blur {
+  position: absolute;
   width: 640px;
   height: 640px;
   border-radius: 50%;

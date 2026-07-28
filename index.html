@@ -17,6 +17,19 @@
         name="description"
         content="Portfolio de Iakobi Iakobashvili, développeur junior à la recherche d'une alternance de 12 mois en développement web, DevOps et intelligence artificielle."
     />
+
+    <!-- Open Graph / social share preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Iakobi Iakobashvili - Développeur Full-Stack, IA & DevOps" />
+    <meta property="og:description" content="Développeur junior à la recherche d'une alternance de 12 mois en développement web, DevOps et intelligence artificielle." />
+    <meta property="og:image" content="https://iakob.netlify.app/profile.png" />
+    <meta property="og:url" content="https://iakob.netlify.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Iakobi Iakobashvili - Développeur Full-Stack, IA & DevOps" />
+    <meta name="twitter:description" content="Développeur junior à la recherche d'une alternance de 12 mois en développement web, DevOps et intelligence artificielle." />
+    <meta name="twitter:image" content="https://iakob.netlify.app/profile.png" />
+
+    <link rel="preload" as="image" href="profile.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -27,8 +40,10 @@
     />
 </head>
 <body>
-    <div class="background-blur blur-left"></div>
-    <div class="background-blur blur-right"></div>
+    <div class="background-blur-wrap">
+        <div class="background-blur blur-left"></div>
+        <div class="background-blur blur-right"></div>
+    </div>
 
     <header class="header" id="header">
         <div class="container nav">
@@ -110,7 +125,7 @@
                             <span class="browser-url">iakobi.dev/portfolio</span>
                         </div>
                         <div class="image-wrapper">
-                            <img src="profile.png" alt="Profile picture" />
+                            <img src="profile.png" alt="Profile picture" fetchpriority="high" decoding="async" />
                         </div>
                     </div>
                 </div>
