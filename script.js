@@ -54,12 +54,45 @@ const chatbotToastClose = document.getElementById("chatbot-toast-close");
 
 let portfolioData = null;
 let currentLanguage = "fr";
+let conversationHistory = []; // last 2 exchanges [{q, a}, ...]
 let chatbotHintTimer = null;
 let chatbotSpotlightTimer = null;
 let chatbotHideTimer = null;
 let chatbotGlowTimer = null;
 let terminalTimer = null;
 let terminalRunId = 0;
+// Per-question cooldown map: question → timestamp of last rate-limit hit
+const rateLimitCooldowns = new Map(); // question text → Date.now()
+const RATE_LIMIT_COOLDOWN_MS = 30000; // 30s cooldown per question
+
+// ── Local question cache (survives page reload, keys by question text) ──
+const CACHE_STORAGE_KEY = "chatbot_qa_cache_v2";
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+function loadCache() {
+    try {
+        const raw = localStorage.getItem(CACHE_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+}
+function saveCache(cache) {
+    try { localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(cache)); } catch {}
+}
+function getFromCache(key) {
+    const cache = loadCache();
+    const entry = cache[key];
+    if (!entry) return null;
+    if (Date.now() - entry.ts > CACHE_TTL_MS) {
+        delete cache[key];
+        saveCache(cache);
+        return null;
+    }
+    return entry.answer;
+}
+function setCache(key, answer) {
+    const cache = loadCache();
+    cache[key] = { answer, ts: Date.now() };
+    saveCache(cache);
+}
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -339,7 +372,8 @@ async function getAIReply(question) {
             },
             body: JSON.stringify({
                 message: question,
-                language: currentLanguage
+                language: currentLanguage,
+                history: conversationHistory
             })
         });
 
@@ -906,15 +940,78 @@ function getBotReply(question) {
     return ui?.chatbot?.fallback || "I do not have that exact information yet.";
 }
 
+function showTypingIndicator() {
+    if (!chatbotBody) return;
+    // Remove any existing typing indicator
+    const existing = chatbotBody.querySelector(".typing-indicator");
+    if (existing) existing.remove();
+
+    const el = document.createElement("div");
+    el.className = "typing-indicator";
+    el.innerHTML = `
+        <div class="typing-dots">
+            <span></span><span></span><span></span>
+        </div>
+        <span class="typing-label">${currentLanguage === "fr" ? "Analyse" : "Thinking"}</span>
+    `;
+    chatbotBody.appendChild(el);
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    if (!chatbotBody) return;
+    const el = chatbotBody.querySelector(".typing-indicator");
+    if (el) el.remove();
+}
+
 function sendChatbotQuestion(question) {
     const cleanedQuestion = question.trim();
     if (cleanedQuestion === "") return;
 
+    // ── Check local cache first (serves instantly, no API call, no cooldown) ──
+    const cached = getFromCache(cleanedQuestion);
+    if (cached) {
+        addMessage(cleanedQuestion, "user");
+        addMessage(cached, "bot");
+        conversationHistory.push({ q: cleanedQuestion, a: cached });
+        if (conversationHistory.length > 2) conversationHistory.shift();
+        if (chatbotInput) chatbotInput.value = "";
+        return;
+    }
+
+    // ── Per-question rate limit cooldown (only blocks retries of the SAME question) ──
+    const lastHit = rateLimitCooldowns.get(cleanedQuestion);
+    if (lastHit) {
+        const remaining = Math.ceil((RATE_LIMIT_COOLDOWN_MS - (Date.now() - lastHit)) / 1000);
+        addMessage(cleanedQuestion, "user");
+        addMessage(currentLanguage === "fr"
+            ? `Attendez encore ${remaining}s… les serveurs AI sont temporairement saturés.`
+            : `Please wait ${remaining}s more… AI servers are temporarily overwhelmed.`,
+            "bot"
+        );
+        return;
+    }
+
     addMessage(cleanedQuestion, "user");
+    showTypingIndicator();
 
     setTimeout(async () => {
         const answer = await getAIReply(cleanedQuestion);
+        hideTypingIndicator();
+        // Check if response indicates rate limit / quota exhausted
+        const isRateLimited = answer.toLowerCase().includes("exhausted") ||
+                              answer.toLowerCase().includes("quota") ||
+                              answer.toLowerCase().includes("overwhelmed") ||
+                              answer.toLowerCase().includes("saturés");
+        if (isRateLimited) {
+            rateLimitCooldowns.set(cleanedQuestion, Date.now());
+        } else {
+            // Cache the successful answer
+            setCache(cleanedQuestion, answer);
+        }
         addMessage(answer, "bot");
+        conversationHistory.push({ q: cleanedQuestion, a: answer });
+        if (conversationHistory.length > 2) conversationHistory.shift();
     }, 250);
 
     if (chatbotInput) {
