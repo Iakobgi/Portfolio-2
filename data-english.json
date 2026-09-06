@@ -1,14 +1,14 @@
 {
   "personal": {
     "name": "Iakobi Iakobashvili",
-    "title": "Full-Stack, AI & DevOps Developer",
+    "title": "Full-Stack Developer",
     "location": "Fontaine-le-Comte, France",
     "email": "iakobi.dev@gmail.com",
     "phone": "+33 7 62 70 16 71",
     "linkedin": "https://www.linkedin.com/in/iakobi-iakobashvili-b157a9230",
     "github": "https://github.com/Iakobgi",
     "portfolio": "https://iakobgi.github.io/portfolio/",
-    "summary": "Junior developer looking for a 12-month apprenticeship starting in November 2026, focused on AI, DevOps and Full-Stack development.",
+    "summary": "Junior developer looking for a 12-month apprenticeship starting in November 2026, focused on Full-Stack development, AI and DevOps.",
     "myself": "My name is Iakobi Iakobashvili, I am 24 years old and I am a junior developer specialized in Full-Stack development, DevOps and Artificial Intelligence."
   },
   "apprenticeship": {
@@ -22,36 +22,33 @@
       "PHP",
       "SQL",
       "JavaScript",
-      "TypeScript",
       "C++",
       "Python",
-      "Bash",
+      "GitHub",
+      "Cloud deployment",
+      "Linux",
+      "UML",
+      "Qt Creator",
+      "LLM APIs",
+      "Hugging Face",
+      "UI/UX"
+    ],
+    "learning": [
+      "CI/CD",
+      "Cloud AI services",
+      "FastAPI",
+      "TypeScript",
       "Dart",
       "React",
       "Angular",
       "Node.js",
       "Flutter",
       "Symfony",
-      "REST APIs",
-      "Git/GitHub",
+      "RAG Pipelines",
       "Docker",
-      "Linux",
-      "JSON",
-      "UML",
-      "QT Creator",
-      "AI API Integration",
-      "Hugging Face",
-      "Google Colab",
-      "RAG Pipelines"
-    ],
-    "learning": [
-      "CI/CD",
-      "Cloud deployment",
-      "Advanced AI agents",
-      "LLM orchestration",
-      "UI/UX",
-      "AIaaS",
-      "LLM APIs"
+      "REST APIs",
+      "Git",
+      "Bash"
     ],
     "soft": [
       "Autonomous",
@@ -211,12 +208,12 @@
       "title": "Tech stack & tools",
       "subtitle": "Technologies I use and explore",
       "groups": {
-        "frontend": "Frontend & Web",
+        "frontend": "Frontend & Applications",
         "backend": "Backend & APIs",
-        "ai": "AI & Data",
+        "ai": "AI & LLMs",
         "devops": "DevOps & Cloud",
-        "systems": "Systems & Engineering",
-        "mindset": "Mindset & Growth"
+        "systems": "Software & Systems",
+        "mindset": "Soft Skills"
       }
     },
     "projects": {

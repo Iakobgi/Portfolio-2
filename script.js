@@ -482,28 +482,68 @@ function renderContactJSON(personal, apprenticeship) {
 function renderSkillsSection(skills, ui) {
     if (!skillsList) return;
 
-    const skillLookup = new Set([
+    // Match translated data to stable skill names so both languages show the same skills.
+    const skillAliases = {
+        "API REST": "REST APIs",
+        "Déploiement cloud": "Cloud deployment",
+        "Intégration d'API IA": "AI API Integration",
+        "Pipelines RAG": "RAG Pipelines",
+        "APIs LLM": "LLM APIs",
+        "Orchestration LLM": "LLM orchestration",
+        "Agents IA avancés": "Advanced AI agents",
+        "Services IA cloud": "Cloud AI services"
+    };
+    const skillLookup = new Map([
         ...skills.technical,
         ...skills.learning,
         ...skills.soft
-    ]);
+    ].map((skill) => [skillAliases[skill] || skill, skill]));
+
+    // Explicit self-assessments; skills without a supplied level remain neutral.
+    const skillLevels = {
+        "PHP": "familiar", "JavaScript": "familiar", "GitHub": "familiar",
+        "Cloud deployment": "familiar", "Linux": "familiar", "UML": "familiar",
+        "LLM APIs": "familiar", "Hugging Face": "familiar",
+        "HTML/CSS": "confident", "SQL": "confident", "C++": "confident",
+        "Python": "confident", "Qt Creator": "confident",
+        "UI/UX": "familiar", "Cloud AI services": "practicing", "TypeScript": "practicing",
+        "React": "practicing", "Node.js": "practicing", "RAG Pipelines": "practicing",
+        "CI/CD": "practicing", "REST APIs": "practicing", "FastAPI": "practicing",
+        "Git": "practicing", "Bash": "practicing",
+        "Docker": "practicing", "Dart": "beginner", "Flutter": "beginner",
+        "Symfony": "beginner", "Angular": "beginner"
+    };
+    const levelLabels = currentLanguage === "fr"
+        ? { beginner: "En apprentissage · Débutant", practicing: "En apprentissage · Quelques bases", familiar: "Acquis · À l’aise avec les bases", confident: "Acquis · Bonne maîtrise" }
+        : { beginner: "Learning · Beginner", practicing: "Learning · Some foundations", familiar: "Known · Familiar with the basics", confident: "Known · Confident" };
+    const legend = `
+        <div class="skills-legend" aria-label="${currentLanguage === "fr" ? "Légende des niveaux" : "Skill level legend"}">
+            <span class="skills-legend-item"><span class="skills-legend-swatches" aria-hidden="true"><i class="skill-swatch skill-level-beginner"></i><i class="skill-swatch skill-level-practicing"></i></span>${currentLanguage === "fr" ? "En apprentissage" : "Learning"}</span>
+            <span class="skills-legend-item"><span class="skills-legend-swatches" aria-hidden="true"><i class="skill-swatch skill-level-familiar"></i><i class="skill-swatch skill-level-confident"></i></span>${currentLanguage === "fr" ? "Acquis" : "Known"}</span>
+        </div>`;
+    const renderSkill = (skill) => {
+        const label = skillLookup.get(skill);
+        const level = skillLevels[skill];
+        if (!level) return `<span class="skill card">${label}</span>`;
+        return `<span class="skill card skill-rated skill-level-${level}" tabindex="0" aria-label="${label}: ${levelLabels[level]}">${label}<span class="skill-level-tip" aria-hidden="true">${levelLabels[level]}</span></span>`;
+    };
 
     const commonLabels = currentLanguage === "fr"
         ? {
-            frontend: "Interface & Web",
+            frontend: "Frontend & Applications",
             backend: "Backend & APIs",
-            ai: "IA & Données",
+            ai: "IA & LLM",
             devops: "DevOps & Cloud",
-            systems: "Systèmes & Ingénierie",
-            mindset: "Esprit & apprentissage"
+            systems: "Logiciel & Systèmes",
+            mindset: "Savoir-être"
         }
         : {
-            frontend: "Frontend & Web",
+            frontend: "Frontend & Applications",
             backend: "Backend & APIs",
-            ai: "AI & Data",
+            ai: "AI & LLMs",
             devops: "DevOps & Cloud",
-            systems: "Systems & Engineering",
-            mindset: "Mindset & Growth"
+            systems: "Software & Systems",
+            mindset: "Soft Skills"
         };
 
     const skillGroups = [
@@ -523,34 +563,34 @@ function renderSkillsSection(skills, ui) {
             description: currentLanguage === "fr"
                 ? "Logique applicative, services et accès aux données"
                 : "Application logic, services, and data access",
-            skills: ["PHP", "Symfony", "Node.js", "SQL", "REST APIs", "JSON"]
+            skills: ["PHP", "Symfony", "Node.js", "Python", "FastAPI", "SQL", "REST APIs", "JSON"]
         },
         {
             id: "ai",
             icon: "fa-robot",
             label: ui.skills?.groups?.ai || commonLabels.ai,
             description: currentLanguage === "fr"
-                ? "Intégration IA, pipelines et expérimentation"
-                : "AI integration, pipelines, and experimentation",
-            skills: ["Python", "AI API Integration", "Hugging Face", "Google Colab", "RAG Pipelines", "LLM APIs", "LLM orchestration", "Advanced AI agents", "AIaaS"]
+                ? "Intégration de modèles IA, pipelines RAG et services cloud"
+                : "AI model integration, RAG pipelines, and cloud services",
+            skills: ["Python", "AI API Integration", "Hugging Face", "Google Colab", "RAG Pipelines", "LLM APIs", "LLM orchestration", "Advanced AI agents", "Cloud AI services"]
         },
         {
             id: "devops",
             icon: "fa-cloud",
             label: ui.skills?.groups?.devops || commonLabels.devops,
             description: currentLanguage === "fr"
-                ? "Conteneurisation, déploiement et automatisation"
-                : "Containerization, deployment, and automation",
-            skills: ["Docker", "Linux", "Bash", "Git/GitHub", "CI/CD", "Cloud deployment"]
+                ? "Gestion de versions, conteneurisation, déploiement et automatisation"
+                : "Version control, containerization, deployment, and automation",
+            skills: ["Docker", "Linux", "Bash", "Git", "GitHub", "CI/CD", "Cloud deployment"]
         },
         {
             id: "systems",
             icon: "fa-microchip",
             label: ui.skills?.groups?.systems || commonLabels.systems,
             description: currentLanguage === "fr"
-                ? "Programmation système, modélisation et développement natif"
-                : "Systems programming, modeling, and native development",
-            skills: ["C++", "UML", "QT Creator"]
+                ? "Développement logiciel et natif, modélisation et outils"
+                : "Software and native development, modeling, and tools",
+            skills: ["C++", "UML", "Qt Creator"]
         },
         {
             id: "mindset",
@@ -596,9 +636,10 @@ function renderSkillsSection(skills, ui) {
                             <h3 class="skills-group-title">${group.label}</h3>
                             <p class="skills-group-description">${group.description}</p>
                         </div>
+                        ${group.id !== "mindset" ? legend : ""}
                     </div>
                     <div class="skills-pills">
-                        ${group.skills.map((skill) => `<span class="skill card">${skill}</span>`).join("")}
+                        ${group.skills.map(renderSkill).join("")}
                     </div>
                 </article>
             `).join("")}
@@ -645,7 +686,10 @@ function renderProjectCards(projects, ui) {
 
     projectsTrack.innerHTML = "";
 
-    projects.slice(0, 4).forEach((project, index) => {
+    // Feature completed client work while preserving each project's original assets and URL.
+    [3, 0, 1, 2].forEach((index) => {
+        const project = projects[index];
+        if (!project) return;
         const card = document.createElement("a");
         card.href = links[index];
         card.className = "project-card";
@@ -692,7 +736,7 @@ function renderProjectCards(projects, ui) {
                     <span>${ui.projects.comingSoonTag}</span>
                 </div>
                 <h3>${lockedProject.name}</h3>
-                <p>${lockedProject.description}</p>
+                <p>${lockedProject.shortDescription || lockedProject.description}</p>
                 <span class="project-link-text locked-text">
                     ${ui.projects.comingSoon} <i class="fa-solid fa-lock"></i>
                 </span>
@@ -701,6 +745,7 @@ function renderProjectCards(projects, ui) {
 
         projectsTrack.appendChild(lockedCard);
     }
+    projectsTrack.scrollLeft = 0;
 }
 
 function fillProjectPage() {
@@ -750,7 +795,8 @@ function getScrollAmount() {
     const card = projectsTrack.querySelector(".project-card");
     if (!card) return 300;
 
-    return card.offsetWidth + 24;
+    const gap = parseFloat(getComputedStyle(projectsTrack).columnGap) || 0;
+    return card.getBoundingClientRect().width + gap;
 }
 
 if (projectsPrev && projectsTrack) {

@@ -1,14 +1,14 @@
 {
   "personal": {
     "name": "Iakobi Iakobashvili",
-    "title": "Développeur Full-Stack, IA & DevOps",
+    "title": "Développeur Full-Stack",
     "location": "Fontaine-le-Comte, France",
     "email": "iakobi.dev@gmail.com",
     "phone": "+33 7 62 70 16 71",
     "linkedin": "https://www.linkedin.com/in/iakobi-iakobashvili-b157a9230",
     "github": "https://github.com/Iakobgi",
     "portfolio": "https://iakobgi.github.io/portfolio/",
-    "summary": "Développeur junior à la recherche d'une alternance de 12 mois à partir de novembre 2026, axé sur l'intelligence artificielle, DevOps et le développement full-stack.",
+    "summary": "Développeur junior à la recherche d'une alternance de 12 mois à partir de novembre 2026, axé sur le développement Full-Stack, l'Intelligence Artificielle et le DevOps.",
     "myself": "Je m'appelle Iakobi Iakobashvili, j'ai 24 ans et je suis un développeur junior spécialisé en développement Full-Stack, DevOps et Intelligence Artificielle."
   },
   "apprenticeship": {
@@ -22,36 +22,33 @@
       "PHP",
       "SQL",
       "JavaScript",
-      "TypeScript",
       "C++",
       "Python",
-      "Bash",
+      "GitHub",
+      "Déploiement cloud",
+      "Linux",
+      "UML",
+      "Qt Creator",
+      "APIs LLM",
+      "Hugging Face",
+      "UI/UX"
+    ],
+    "learning": [
+      "CI/CD",
+      "Services IA cloud",
+      "FastAPI",
+      "TypeScript",
       "Dart",
       "React",
       "Angular",
       "Node.js",
       "Flutter",
       "Symfony",
-      "API REST",
-      "Git/GitHub",
+      "Pipelines RAG",
       "Docker",
-      "Linux",
-      "JSON",
-      "UML",
-      "QT Creator",
-      "Intégration d'API IA",
-      "Hugging Face",
-      "Google Colab",
-      "Pipelines RAG"
-    ],
-    "learning": [
-      "CI/CD",
-      "Déploiement cloud",
-      "Agents IA avancés",
-      "Orchestration LLM",
-      "UI/UX",
-      "AIaaS",
-      "APIs LLM"
+      "API REST",
+      "Git",
+      "Bash"
     ],
     "soft": [
       "Autonome",
@@ -211,12 +208,12 @@
       "title": "Technologies & outils",
       "subtitle": "Technologies que j’utilise et que j’explore",
       "groups": {
-        "frontend": "Interface & Web",
+        "frontend": "Frontend & Applications",
         "backend": "Backend & APIs",
-        "ai": "IA & Données",
+        "ai": "IA & LLM",
         "devops": "DevOps & Cloud",
-        "systems": "Systèmes & Ingénierie",
-        "mindset": "Esprit & apprentissage"
+        "systems": "Logiciel & Systèmes",
+        "mindset": "Savoir-être"
       }
     },
     "projects": {
