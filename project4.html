@@ -70,7 +70,7 @@
                             <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
                             <span class="browser-url">client-site.html</span>
                         </div>
-                        <img id="project-image" src="project4.jpg" alt="Project image" />
+                        <img id="project-image" src="project4.png" alt="Project image" />
                     </div>
                 </div>
 
@@ -91,6 +91,47 @@
             </div>
         </div>
     </section>
+
+    <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open chatbot">
+        <i class="fa-solid fa-comments"></i>
+    </button>
+
+    <div class="chatbot-window" id="chatbot-window">
+        <div class="chatbot-header">
+            <h3 data-i18n="ui.chatbot.title">Assistant Portfolio</h3>
+            <button class="chatbot-close" id="chatbot-close" aria-label="Close chatbot">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="chatbot-body" id="chatbot-body">
+            <div class="bot-message chatbot-welcome">
+                <p data-i18n="ui.chatbot.welcome">Bonjour ! Je peux vous aider à en savoir plus rapidement sur Iakobi.</p>
+            </div>
+
+            <div class="bot-message chatbot-examples">
+                <p data-i18n="ui.chatbot.try">Essayez l’une de ces questions :</p>
+                <div class="chatbot-suggestion-list">
+                    <button type="button" class="chatbot-suggestion" data-i18n="ui.chatbot.q1"></button>
+                    <button type="button" class="chatbot-suggestion" data-i18n="ui.chatbot.q2"></button>
+                    <button type="button" class="chatbot-suggestion" data-i18n="ui.chatbot.q3"></button>
+                    <button type="button" class="chatbot-suggestion" data-i18n="ui.chatbot.q4"></button>
+                </div>
+            </div>
+        </div>
+
+        <form class="chatbot-input-area" id="chatbot-form">
+            <input
+                type="text"
+                id="chatbot-input"
+                placeholder="Posez une question..."
+                autocomplete="off"
+            />
+            <button type="submit" aria-label="Send message">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
 
     <script src="script.js"></script>
 </body>

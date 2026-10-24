@@ -631,29 +631,29 @@ function renderSkillsSection(skills, ui) {
 function renderProjectCards(projects, ui) {
     if (!projectsTrack || !projects) return;
 
-    const images = ["project1.jpg", "project2.jpg", "project3.jpg", "project4.jpg", "project5.png"];
-    const links = ["project1.html", "project2.html", "project3.html", "project4.html", "#"];
-    const fileNames = ["portfolio.jsx", "extension.js", "chatbot.py", "client-site.html", "dashboard.ts"];
+    const images = ["project1.png", "project2.png", "project3.png", "project4.png", "project5.png", "project6.png", "project7.png"];
+    const links = ["project1.html", "project2.html", "project3.html", "project4.html", "project5.html", "project6.html", "project7.html"];
+    const fileNames = ["portfolio.jsx", "extension.js", "chatbot.py", "client-site.html", "dashboard.ts", "greenhouse.cpp", "local-ai.md"];
     const tagSets = currentLanguage === "fr"
         ? [
             ["Web", "Portfolio"],
             ["Confidentialité", "Extension"],
             ["IA", "Chatbot"],
             ["Freelance", "Site web", "Fiverr"],
-            ["IA", "SEO", "GEO", "À venir"]
+            ["IA", "SEO", "GEO"], ["Académique", "IoT", "C++"], ["Stage", "IA locale"]
         ]
         : [
             ["Web", "Portfolio"],
             ["Privacy", "Extension"],
             ["AI", "Chatbot"],
             ["Freelance", "Website", "Fiverr"],
-            ["AI", "SEO", "GEO", "Coming soon"]
+            ["AI", "SEO", "GEO"], ["Academic", "IoT", "C++"], ["Internship", "Local AI"]
         ];
 
     projectsTrack.innerHTML = "";
 
     // Feature completed client work while preserving each project's original assets and URL.
-    [3, 0, 1, 2].forEach((index) => {
+    [3, 4, 0, 2, 1, 5, 6].forEach((index) => {
         const project = projects[index];
         if (!project) return;
         const card = document.createElement("a");
@@ -683,34 +683,6 @@ function renderProjectCards(projects, ui) {
         projectsTrack.appendChild(card);
     });
 
-    const lockedProject = projects[4];
-    if (lockedProject) {
-        const lockedCard = document.createElement("div");
-        lockedCard.className = "project-card locked-project";
-
-        lockedCard.innerHTML = `
-            <div class="card-chrome">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="card-filename">${fileNames[4]}</span>
-            </div>
-            <div class="project-image-wrap">
-                <img src="${images[4]}" alt="${lockedProject.name}" loading="lazy" decoding="async" />
-            </div>
-            <div class="project-content">
-                <div class="project-tags">
-                    <span>${ui.projects.locked}</span>
-                    <span>${ui.projects.comingSoonTag}</span>
-                </div>
-                <h3>${lockedProject.name}</h3>
-                <p>${lockedProject.shortDescription || lockedProject.description}</p>
-                <span class="project-link-text locked-text">
-                    ${ui.projects.comingSoon} <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-        `;
-
-        projectsTrack.appendChild(lockedCard);
-    }
     projectsTrack.scrollLeft = 0;
 }
 
@@ -739,6 +711,16 @@ function fillProjectPage() {
     setText("project-technologies", data.technologies);
     setText("project-learned-title", data.learnedTitle);
     setText("project-learned", data.learned);
+
+    document.title = `${data.title} - Portfolio`;
+    const viewDoc = document.getElementById("view-documentation-button");
+    const downloadDoc = document.getElementById("download-documentation-button");
+    if (viewDoc) viewDoc.textContent = portfolioData.ui.buttons.viewDocumentation;
+    if (downloadDoc) downloadDoc.textContent = portfolioData.ui.buttons.downloadDocumentation;
+    setText("documentation-title", portfolioData.ui.projects.documentationTitle);
+    setText("documentation-fallback", portfolioData.ui.projects.documentationFallback);
+    const docFrame = document.getElementById("documentation-frame");
+    if (docFrame) docFrame.setAttribute("aria-label", portfolioData.ui.projects.documentationTitle);
 
     const image = document.getElementById("project-image");
     if (image) {
@@ -783,6 +765,15 @@ if (projectsNext && projectsTrack) {
     });
 }
 
+const liveDemoButton = document.getElementById("live-demo-button");
+if (liveDemoButton && chatbotWindow) {
+    liveDemoButton.addEventListener("click", () => {
+        hideChatbotHint();
+        chatbotWindow.classList.add("active");
+        chatbotInput?.focus();
+    });
+}
+
 if (chatbotToggle && chatbotWindow) {
     chatbotToggle.addEventListener("click", () => {
         hideChatbotHint();
@@ -819,7 +810,26 @@ function addMessage(text, type) {
 
     const message = document.createElement("div");
     message.className = type === "user" ? "user-message" : "bot-message";
-    message.innerHTML = `<p>${text}</p>`;
+    const paragraph = document.createElement("p");
+    const content = String(text);
+    if (type === "user") {
+        paragraph.textContent = content;
+    } else {
+        let position = 0;
+        for (const match of content.matchAll(/https?:\/\/[^\s<>]+/g)) {
+            const url = match[0].replace(/[.,;:!?)\]}]+$/, "");
+            paragraph.appendChild(document.createTextNode(content.slice(position, match.index)));
+            const link = document.createElement("a");
+            link.href = url;
+            link.textContent = url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            paragraph.appendChild(link);
+            position = match.index + url.length;
+        }
+        paragraph.appendChild(document.createTextNode(content.slice(position)));
+    }
+    message.appendChild(paragraph);
     chatbotBody.appendChild(message);
     chatbotBody.scrollTop = chatbotBody.scrollHeight;
 }

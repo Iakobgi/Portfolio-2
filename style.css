@@ -1695,8 +1695,16 @@ main .contact-page .contact-link:hover i {
   gap: 12px;
   flex: 1;
 }
+.bot-message a {
+  color: var(--mint);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .bot-message,
 .user-message {
+  min-width: 0;
+  flex-shrink: 0;
+  overflow-wrap: anywhere;
   max-width: 88%;
   padding: 11px 14px;
   border-radius: 12px;
@@ -2584,3 +2592,11 @@ main .contact-page .contact-link:hover i {
     padding: 10px 24px 10px 10px;
   }
 }
+
+.documentation-section { scroll-margin-top: 100px; padding-top: 24px; }
+.documentation-section p { margin: 16px 0; }
+.documentation-frame { width: 100%; height: 80vh; min-height: 420px; border: 1px solid var(--border); border-radius: 12px; background: white; }
+
+.documentation-viewer { max-height: 80vh; overflow-y: auto; overscroll-behavior-y: contain; border: 1px solid var(--border); border-radius: 12px; background: #ddd; padding: 12px; }
+.documentation-viewer img { display: block; width: 100%; max-width: 1000px; height: auto; margin: 0 auto 12px; background: white; }
+.documentation-viewer:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
