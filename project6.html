@@ -28,6 +28,7 @@
             <nav class="navbar" id="navbar">
                 <a href="index.html#home" data-i18n="ui.nav.home">Accueil</a>
                 <a href="index.html#about" data-i18n="ui.nav.about">À propos</a>
+                <a href="index.html#skills" data-i18n="ui.nav.skills">Compétences</a>
                 <a href="index.html#projects" data-i18n="ui.nav.projects">Projets</a>
                 <a href="contact.html" data-i18n="ui.nav.contact">Contact</a>
             </nav>
@@ -55,12 +56,13 @@
         </div>
     </header>
 
-    <section class="section" style="padding-top: 160px;">
+    <section class="section project-detail-section">
         <div class="container">
             <div class="section-title reveal">
-                <span class="eyebrow" id="project-eyebrow">Projet 01</span>
+                <div id="project-switcher"></div>
                 <h2 id="project-title">Projet</h2>
                 <p id="project-subtitle"></p>
+                <p id="project-period" class="project-period"></p>
             </div>
 
             <div class="about-grid project-detail-grid">
@@ -70,7 +72,7 @@
                             <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
                             <span class="browser-url">greenhouse.cpp</span>
                         </div>
-                        <img id="project-image" src="project6.png" alt="Project image" />
+                        <img id="project-image" src="project-serre-fr.webp" alt="Project image" />
                     </div>
                 </div>
 
@@ -86,7 +88,7 @@
 
                     <div class="hero-buttons" style="margin-top: 25px;">
                         <a id="view-documentation-button" href="#documentation" class="btn btn-primary">Voir la documentation</a>
-                        <a id="download-documentation-button" href="documents/greenhouse-documentation.pdf" download class="btn btn-secondary">Télécharger le PDF</a>
+                        <a id="download-documentation-button" href="documents/greenhouse-documentation-fr.pdf" download class="btn btn-secondary">Télécharger le PDF</a>
                     </div>
                 </div>
             </div>
@@ -96,8 +98,9 @@
     <section id="documentation" class="section documentation-section">
         <div class="container">
             <h2 id="documentation-title">Documentation du projet</h2>
-            <p><a id="documentation-fallback" href="documents/greenhouse-documentation.pdf" target="_blank" rel="noopener noreferrer">Ouvrir le PDF dans un nouvel onglet</a></p>
-            <div id="documentation-frame" class="documentation-viewer" role="region" tabindex="0" aria-label="Documentation"><img src="documents/greenhouse/page-1.webp" alt="Page 1 / 22" width="1060" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-2.webp" alt="Page 2 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-3.webp" alt="Page 3 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-4.webp" alt="Page 4 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-5.webp" alt="Page 5 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-6.webp" alt="Page 6 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-7.webp" alt="Page 7 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-8.webp" alt="Page 8 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-9.webp" alt="Page 9 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-10.webp" alt="Page 10 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-11.webp" alt="Page 11 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-12.webp" alt="Page 12 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-13.webp" alt="Page 13 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-14.webp" alt="Page 14 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-15.webp" alt="Page 15 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-16.webp" alt="Page 16 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-17.webp" alt="Page 17 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-18.webp" alt="Page 18 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-19.webp" alt="Page 19 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-20.webp" alt="Page 20 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-21.webp" alt="Page 21 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-22.webp" alt="Page 22 / 22" width="1062" height="1500" loading="lazy" decoding="async"></div>
+            <p id="documentation-language-notice">Documentation disponible uniquement en français. L’introduction suit la langue sélectionnée ; les pages du rapport original restent en français.</p>
+            <p><a id="documentation-fallback" href="documents/greenhouse-documentation-fr.pdf" target="_blank" rel="noopener noreferrer">Ouvrir le PDF dans un nouvel onglet</a></p>
+            <div id="documentation-frame" class="documentation-viewer" role="region" tabindex="0" aria-label="Documentation"><img src="documents/greenhouse/page-1-fr.webp" alt="Page 1 / 22" width="1060" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-2.webp" alt="Page 2 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-3.webp" alt="Page 3 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-4.webp" alt="Page 4 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-5.webp" alt="Page 5 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-6.webp" alt="Page 6 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-7.webp" alt="Page 7 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-8.webp" alt="Page 8 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-9.webp" alt="Page 9 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-10.webp" alt="Page 10 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-11.webp" alt="Page 11 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-12.webp" alt="Page 12 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-13.webp" alt="Page 13 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-14.webp" alt="Page 14 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-15.webp" alt="Page 15 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-16.webp" alt="Page 16 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-17.webp" alt="Page 17 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-18.webp" alt="Page 18 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-19.webp" alt="Page 19 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-20.webp" alt="Page 20 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-21.webp" alt="Page 21 / 22" width="1062" height="1500" loading="lazy" decoding="async"><img src="documents/greenhouse/page-22.webp" alt="Page 22 / 22" width="1062" height="1500" loading="lazy" decoding="async"></div>
         </div>
     </section>
 

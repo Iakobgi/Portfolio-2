@@ -109,8 +109,32 @@ document.querySelectorAll(".navbar a").forEach((link) => {
     });
 });
 
+function updateActiveNavigation() {
+    if (!navbar) return;
+    const links = [...navbar.querySelectorAll("a")];
+    const sections = links.map((link) => {
+        const url = new URL(link.href, window.location.href);
+        return url.pathname === window.location.pathname && url.hash
+            ? document.getElementById(url.hash.slice(1)) : null;
+    }).filter(Boolean);
+    let active = sections[0];
+    sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= 160) active = section;
+    });
+    links.forEach((link) => {
+        const url = new URL(link.href, window.location.href);
+        const onProjectPage = document.body.hasAttribute("data-project-index");
+        const selected = onProjectPage ? url.hash === "#projects"
+            : active ? url.pathname === window.location.pathname && url.hash === `#${active.id}`
+            : !url.hash && url.pathname === window.location.pathname;
+        if (selected) link.setAttribute("aria-current", active && !onProjectPage ? "location" : "page");
+        else link.removeAttribute("aria-current");
+    });
+}
+
 window.addEventListener("scroll", () => {
     revealOnScroll();
+    updateActiveNavigation();
 
     if (header) {
         if (window.scrollY > 40) {
@@ -121,7 +145,7 @@ window.addEventListener("scroll", () => {
     }
 });
 
-window.addEventListener("load", revealOnScroll);
+window.addEventListener("load", () => { revealOnScroll(); updateActiveNavigation(); });
 
 function revealOnScroll() {
     const elements = document.querySelectorAll(".reveal");
@@ -360,6 +384,7 @@ function fillIndexPage() {
     if (!portfolioData || !heroName) return;
 
     const { personal, apprenticeship, skills, interests, projects, ui } = portfolioData;
+    document.querySelector(".hero-facts")?.setAttribute("aria-label", ui.heroFactsLabel);
 
     heroName.textContent = personal.name;
     heroTitle.textContent = personal.title;
@@ -457,7 +482,6 @@ function renderSkillsSection(skills, ui) {
         "APIs LLM": "LLM APIs",
         "Orchestration LLM": "LLM orchestration",
         "Agents IA avancés": "Advanced AI agents",
-        "Services IA cloud": "Cloud AI services"
     };
     const skillLookup = new Map([
         ...skills.technical,
@@ -467,12 +491,17 @@ function renderSkillsSection(skills, ui) {
 
     // Explicit self-assessments; skills without a supplied level remain neutral.
     const skillLevels = {
+        "PostgreSQL": "practicing", "Supabase": "practicing",
+        "Cloudflare": "practicing", "Oracle Cloud": "practicing", "Render": "practicing",
+        "MySQL": "familiar", "MariaDB": "familiar", "Netlify": "familiar",
+        "Hostinger": "familiar", "Visual Studio Code": "familiar",
+        "OpenRouter": "familiar", "Scikit-learn": "familiar", "Playwright": "beginner",
         "PHP": "familiar", "JavaScript": "familiar", "GitHub": "familiar",
         "Cloud deployment": "familiar", "Linux": "familiar", "UML": "familiar",
         "LLM APIs": "familiar", "Hugging Face": "familiar",
         "HTML/CSS": "confident", "SQL": "confident", "C++": "confident",
         "Python": "confident", "Qt Creator": "confident",
-        "UI/UX": "familiar", "Cloud AI services": "practicing", "TypeScript": "practicing",
+        "UI/UX": "familiar", "TypeScript": "practicing",
         "React": "practicing", "Node.js": "practicing", "RAG Pipelines": "practicing",
         "CI/CD": "practicing", "REST APIs": "practicing", "FastAPI": "practicing",
         "Git": "practicing", "Bash": "practicing",
@@ -484,7 +513,7 @@ function renderSkillsSection(skills, ui) {
         : { beginner: "Learning · Beginner", practicing: "Learning · Some foundations", familiar: "Known · Familiar with the basics", confident: "Known · Confident" };
     const legend = `
         <div class="skills-legend" aria-label="${currentLanguage === "fr" ? "Légende des niveaux" : "Skill level legend"}">
-            <span class="skills-legend-item"><span class="skills-legend-swatches" aria-hidden="true"><i class="skill-swatch skill-level-beginner"></i><i class="skill-swatch skill-level-practicing"></i></span>${currentLanguage === "fr" ? "En apprentissage" : "Learning"}</span>
+            <span class="skills-legend-item"><span class="skills-legend-swatches" aria-hidden="true"><i class="skill-swatch skill-level-practicing"></i><i class="skill-swatch skill-level-beginner"></i></span>${currentLanguage === "fr" ? "En apprentissage" : "Learning"}</span>
             <span class="skills-legend-item"><span class="skills-legend-swatches" aria-hidden="true"><i class="skill-swatch skill-level-familiar"></i><i class="skill-swatch skill-level-confident"></i></span>${currentLanguage === "fr" ? "Acquis" : "Known"}</span>
         </div>`;
     const renderSkill = (skill) => {
@@ -496,19 +525,21 @@ function renderSkillsSection(skills, ui) {
 
     const commonLabels = currentLanguage === "fr"
         ? {
-            frontend: "Frontend & Applications",
-            backend: "Backend & APIs",
-            ai: "IA & LLM",
-            devops: "DevOps & Cloud",
-            systems: "Logiciel & Systèmes",
+            frontend: "Web & Applications",
+            backend: "Backend & Logiciel",
+            databases: "Bases de données",
+            ai: "IA & Données",
+            devops: "Cloud & DevOps",
+            systems: "Outils de développement",
             mindset: "Savoir-être"
         }
         : {
-            frontend: "Frontend & Applications",
-            backend: "Backend & APIs",
-            ai: "AI & LLMs",
-            devops: "DevOps & Cloud",
-            systems: "Software & Systems",
+            frontend: "Web & Applications",
+            backend: "Backend & Software",
+            databases: "Databases",
+            ai: "AI & Data",
+            devops: "Cloud & DevOps",
+            systems: "Development Workflow",
             mindset: "Soft Skills"
         };
 
@@ -527,18 +558,27 @@ function renderSkillsSection(skills, ui) {
             icon: "fa-server",
             label: ui.skills?.groups?.backend || commonLabels.backend,
             description: currentLanguage === "fr"
-                ? "Logique applicative, services et accès aux données"
-                : "Application logic, services, and data access",
-            skills: ["PHP", "Symfony", "Node.js", "Python", "FastAPI", "SQL", "REST APIs", "JSON"]
+                ? "Développement logiciel, logique applicative et API"
+                : "Software development, application logic, and APIs",
+            skills: ["Python", "C++", "PHP", "Node.js", "Symfony", "FastAPI", "REST APIs"]
+        },
+        {
+            id: "databases",
+            icon: "fa-database",
+            label: ui.skills?.groups?.databases || commonLabels.databases,
+            description: currentLanguage === "fr"
+                ? "Langage SQL, bases relationnelles et plateformes de données"
+                : "SQL, relational databases, and data platforms",
+            skills: ["SQL", "PostgreSQL", "MySQL", "MariaDB", "Supabase"]
         },
         {
             id: "ai",
             icon: "fa-robot",
             label: ui.skills?.groups?.ai || commonLabels.ai,
             description: currentLanguage === "fr"
-                ? "Intégration de modèles IA, pipelines RAG et services cloud"
-                : "AI model integration, RAG pipelines, and cloud services",
-            skills: ["Python", "AI API Integration", "Hugging Face", "Google Colab", "RAG Pipelines", "LLM APIs", "LLM orchestration", "Advanced AI agents", "Cloud AI services"]
+                ? "Intégration de modèles IA, pipelines RAG et outils de données"
+                : "AI model integration, RAG pipelines, and data tools",
+            skills: ["Python", "AI API Integration", "Hugging Face", "OpenRouter", "Scikit-learn", "Google Colab", "RAG Pipelines", "LLM APIs", "LLM orchestration", "Advanced AI agents"]
         },
         {
             id: "devops",
@@ -547,24 +587,24 @@ function renderSkillsSection(skills, ui) {
             description: currentLanguage === "fr"
                 ? "Gestion de versions, conteneurisation, déploiement et automatisation"
                 : "Version control, containerization, deployment, and automation",
-            skills: ["Docker", "Linux", "Bash", "Git", "GitHub", "CI/CD", "Cloud deployment"]
+            skills: ["Docker", "Linux", "Bash", "CI/CD", "Cloud deployment", "Cloudflare", "Oracle Cloud", "Netlify", "Render", "Hostinger"]
         },
         {
             id: "systems",
             icon: "fa-microchip",
             label: ui.skills?.groups?.systems || commonLabels.systems,
             description: currentLanguage === "fr"
-                ? "Développement logiciel et natif, modélisation et outils"
-                : "Software and native development, modeling, and tools",
-            skills: ["C++", "UML", "Qt Creator"]
+                ? "Gestion de versions, éditeurs, modélisation et tests navigateur"
+                : "Version control, editors, modeling, and browser testing",
+            skills: ["Git", "GitHub", "Visual Studio Code", "Qt Creator", "UML", "Playwright"]
         },
         {
             id: "mindset",
             icon: "fa-lightbulb",
             label: ui.skills?.groups?.mindset || commonLabels.mindset,
             description: currentLanguage === "fr"
-                ? "Approche de travail, curiosité et capacité d’adaptation"
-                : "Work approach, curiosity, and adaptability",
+                ? "Approche de travail, curiosité et esprit d’équipe"
+                : "Work approach, curiosity, and teamwork",
             skills: skills.soft
         }
 
@@ -628,10 +668,24 @@ function renderSkillsSection(skills, ui) {
     });
 }
 
+// Keep card and detail-page images aligned with the selected language.
+const projectImages = [
+    { fr: "project-portfolio-fr.webp", en: "project-portfolio-en.webp" },
+    { fr: "project-ext-fr.webp", en: "project-ext-en.webp" },
+    { fr: "project-ai-fr.webp", en: "project-ai-en.webp" },
+    { fr: "project-fiverr-fr.webp", en: "project-fiverr-en.webp" },
+    { fr: "project-seogeo-fr.webp", en: "project-seo-geo-en.webp" },
+    { fr: "project-serre-fr.webp", en: "project-serre-en.webp" },
+    { fr: "project-mistral-fr.webp", en: "project-mistral-en.webp" }
+];
+
+function getProjectImage(index) {
+    return projectImages[index][currentLanguage];
+}
+
 function renderProjectCards(projects, ui) {
     if (!projectsTrack || !projects) return;
 
-    const images = ["project1.png", "project2.png", "project3.png", "project4.png", "project5.png", "project6.png", "project7.png"];
     const links = ["project1.html", "project2.html", "project3.html", "project4.html", "project5.html", "project6.html", "project7.html"];
     const fileNames = ["portfolio.jsx", "extension.js", "chatbot.py", "client-site.html", "dashboard.ts", "greenhouse.cpp", "local-ai.md"];
     const tagSets = currentLanguage === "fr"
@@ -666,13 +720,14 @@ function renderProjectCards(projects, ui) {
                 <span class="card-filename">${fileNames[index]}</span>
             </div>
             <div class="project-image-wrap">
-                <img src="${images[index]}" alt="${project.name}" loading="lazy" decoding="async" />
+                <img src="${getProjectImage(index)}" alt="${project.name}" loading="lazy" decoding="async" />
             </div>
             <div class="project-content">
                 <div class="project-tags">
                     ${tagSets[index].map((tag) => `<span>${tag}</span>`).join("")}
                 </div>
                 <h3>${project.name}</h3>
+                <p class="project-period">${project.period}</p>
                 <p>${project.shortDescription}</p>
                 <span class="project-link-text">
                     ${ui.projects.seeDetails} <i class="fa-solid fa-arrow-right"></i>
@@ -684,6 +739,78 @@ function renderProjectCards(projects, ui) {
     });
 
     projectsTrack.scrollLeft = 0;
+}
+
+function renderProjectSwitcher(activeIndex) {
+    const host = document.getElementById("project-switcher");
+    if (!host) return;
+    const fr = currentLanguage === "fr";
+    const order = [3, 4, 0, 2, 1, 5, 6];
+    const position = order.indexOf(activeIndex);
+    const previous = order[(position + order.length - 1) % order.length];
+    const next = order[(position + 1) % order.length];
+    const shortLabels = fr
+        ? ["Portfolio", "Extension", "Assistant IA", "Site client", "SEO/GEO", "Serre", "Mistral/Mixtral"]
+        : ["Portfolio", "Extension", "AI Assistant", "Client Website", "SEO/GEO", "Greenhouse", "Mistral/Mixtral"];
+    host.innerHTML = `<nav class="project-picker" aria-label="${fr ? "Choisir un projet" : "Choose a project"}">
+        <a class="project-picker-arrow" href="project${previous + 1}.html" aria-label="${fr ? "Projet précédent" : "Previous project"}">‹</a>
+        <details class="project-picker-menu">
+            <summary><span class="project-picker-label">${fr ? "Projet" : "Project"} ${String(position + 1).padStart(2, "0")}</span></summary>
+            <div class="project-picker-popup">
+                <button type="button" class="project-picker-scroll" data-direction="-1" aria-label="${fr ? "Défiler à gauche" : "Scroll left"}">‹</button>
+                <div class="project-picker-options">
+                ${order.map((index, number) => `<a href="project${index + 1}.html"${index === activeIndex ? ' aria-current="page"' : ''}><span class="project-picker-number">${String(number + 1).padStart(2, "0")}</span><span title="${portfolioData.projects[index].name}">${shortLabels[index]}</span>${index === activeIndex ? '<span aria-hidden="true">✓</span>' : ''}</a>`).join("")}
+                </div>
+                <button type="button" class="project-picker-scroll" data-direction="1" aria-label="${fr ? "Défiler à droite" : "Scroll right"}">›</button>
+            </div>
+        </details>
+        <a class="project-picker-arrow" href="project${next + 1}.html" aria-label="${fr ? "Projet suivant" : "Next project"}">›</a>
+    </nav>`;
+    const menu = host.querySelector("details");
+    const options = host.querySelector(".project-picker-options");
+    const popup = host.querySelector(".project-picker-popup");
+    const updateOverflow = () => {
+        popup.classList.toggle("has-overflow", options.scrollWidth > options.clientWidth + 1);
+        host.querySelector('[data-direction="-1"]').disabled = options.scrollLeft <= 1;
+        host.querySelector('[data-direction="1"]').disabled = options.scrollLeft + options.clientWidth >= options.scrollWidth - 1;
+    };
+    host.querySelectorAll(".project-picker-scroll").forEach((button) => {
+        button.addEventListener("click", () => options.scrollBy({
+            left: Number(button.dataset.direction) * options.clientWidth * 0.7,
+            behavior: prefersReducedMotion ? "instant" : "smooth"
+        }));
+    });
+    options.addEventListener("wheel", (event) => {
+        if (event.ctrlKey || options.scrollWidth <= options.clientWidth) return;
+        const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+        if (!delta) return;
+        event.preventDefault();
+        options.scrollLeft += delta * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? options.clientWidth : 1);
+    }, { passive: false });
+    options.addEventListener("scroll", updateOverflow, { passive: true });
+    host.projectPickerObserver?.disconnect();
+    host.projectPickerObserver = new ResizeObserver(updateOverflow);
+    host.projectPickerObserver.observe(options);
+    menu.addEventListener("toggle", () => {
+        if (menu.open) requestAnimationFrame(() => {
+            updateOverflow();
+            const active = options.querySelector('[aria-current="page"]');
+            if (active) options.scrollLeft = active.offsetLeft - (options.clientWidth - active.offsetWidth) / 2;
+            updateOverflow();
+        });
+    });
+    host.onkeydown = (event) => {
+        if (event.key === "Escape") {
+            menu.open = false;
+            menu.querySelector("summary").focus();
+        }
+    };
+    // Replace the previous outside-click listener when changing languages.
+    host.projectPickerCleanup?.();
+    const closeOutside = (event) => { if (!host.contains(event.target)) menu.open = false; };
+    document.addEventListener("click", closeOutside);
+    host.projectPickerCleanup = () => document.removeEventListener("click", closeOutside);
+    host.onfocusout = (event) => { if (!host.contains(event.relatedTarget)) menu.open = false; };
 }
 
 function fillProjectPage() {
@@ -702,9 +829,11 @@ function fillProjectPage() {
         if (element) element.textContent = value;
     };
 
+    renderProjectSwitcher(index);
     setText("project-eyebrow", data.eyebrow);
     setText("project-title", data.title);
     setText("project-subtitle", data.subtitle);
+    setText("project-period", data.period);
     setText("project-description-title", data.descriptionTitle);
     setText("project-description", data.description);
     setText("project-technologies-title", data.technologiesTitle);
@@ -721,9 +850,25 @@ function fillProjectPage() {
     setText("documentation-fallback", portfolioData.ui.projects.documentationFallback);
     const docFrame = document.getElementById("documentation-frame");
     if (docFrame) docFrame.setAttribute("aria-label", portfolioData.ui.projects.documentationTitle);
+    setText("documentation-language-notice", portfolioData.ui.projects.documentationLanguageNotice);
+    const documentation = portfolioData.projects?.[index]?.documentation;
+    if (docFrame && documentation) {
+        const pdfUrl = documentation.pdfUrl.replace("https://iakob.netlify.app/", "");
+        if (downloadDoc) downloadDoc.href = pdfUrl;
+        const fallbackLink = document.getElementById("documentation-fallback");
+        if (fallbackLink) fallbackLink.href = pdfUrl;
+        const cover = docFrame.querySelector("img");
+        if (cover) {
+            const folder = index === 5 ? "greenhouse" : "local-ai";
+            cover.src = `documents/${folder}/page-1-${currentLanguage}.webp`;
+            cover.alt = currentLanguage === "fr" ? "Introduction de la documentation" : "Documentation introduction";
+        }
+    }
+
 
     const image = document.getElementById("project-image");
     if (image) {
+        image.src = getProjectImage(index);
         image.alt = data.imageAlt;
     }
 
@@ -1091,10 +1236,29 @@ document.querySelectorAll(".chatbot-suggestion").forEach((button) => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+async function alignInitialSection() {
+    const id = window.location.hash.slice(1);
+    const section = id && document.getElementById(id);
+    if (!section) return;
+
+    // The browser's first anchor jump happens before translated sections are filled.
+    await document.fonts.ready;
+    if (document.readyState !== "complete") {
+        await new Promise((resolve) => window.addEventListener("load", resolve, { once: true }));
+    }
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    // Respect navigation performed while the page was loading.
+    if (window.location.hash.slice(1) !== id) return;
+    section.scrollIntoView({ behavior: "instant", block: "start" });
+    revealOnScroll();
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
     scheduleChatbotHint();
     scheduleChatbotSpotlight();
 
     const savedLanguage = localStorage.getItem("language") || "fr";
-    changeLanguage(savedLanguage);
+    await changeLanguage(savedLanguage);
+    await alignInitialSection();
+    updateActiveNavigation();
 });
