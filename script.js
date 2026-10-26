@@ -475,6 +475,12 @@ function renderSkillsSection(skills, ui) {
 
     // Match translated data to stable skill names so both languages show the same skills.
     const skillAliases = {
+        "JavaScript ES6+": "JavaScript",
+        "PHP 8": "PHP",
+        "Symfony 7": "Symfony",
+        "UML 2": "UML",
+        "PHPUnit 10": "PHPUnit",
+        "Tests unitaires": "Unit testing",
         "API REST": "REST APIs",
         "Déploiement cloud": "Cloud deployment",
         "Intégration d'API IA": "AI API Integration",
@@ -491,6 +497,8 @@ function renderSkillsSection(skills, ui) {
 
     // Explicit self-assessments; skills without a supplied level remain neutral.
     const skillLevels = {
+        "LangChain": "beginner", "pgvector": "beginner", "Sequelize": "beginner",
+        "PL/SQL": "beginner", "PHPUnit": "beginner", "Unit testing": "beginner", "Agile": "beginner",
         "PostgreSQL": "practicing", "Supabase": "practicing",
         "Cloudflare": "practicing", "Oracle Cloud": "practicing", "Render": "practicing",
         "MySQL": "familiar", "MariaDB": "familiar", "Netlify": "familiar",
@@ -499,7 +507,7 @@ function renderSkillsSection(skills, ui) {
         "PHP": "familiar", "JavaScript": "familiar", "GitHub": "familiar",
         "Cloud deployment": "familiar", "Linux": "familiar", "UML": "familiar",
         "LLM APIs": "familiar", "Hugging Face": "familiar",
-        "HTML/CSS": "confident", "SQL": "confident", "C++": "confident",
+        "HTML/CSS": "confident", "phpMyAdmin": "familiar", "MongoDB": "beginner", "JSON": "familiar", "C++": "confident",
         "Python": "confident", "Qt Creator": "confident",
         "UI/UX": "familiar", "TypeScript": "practicing",
         "React": "practicing", "Node.js": "practicing", "RAG Pipelines": "practicing",
@@ -517,7 +525,7 @@ function renderSkillsSection(skills, ui) {
             <span class="skills-legend-item"><span class="skills-legend-swatches" aria-hidden="true"><i class="skill-swatch skill-level-familiar"></i><i class="skill-swatch skill-level-confident"></i></span>${currentLanguage === "fr" ? "Acquis" : "Known"}</span>
         </div>`;
     const renderSkill = (skill) => {
-        const label = skillLookup.get(skill);
+        const label = skill === "JSON" ? "JSON (format)" : skillLookup.get(skill);
         const level = skillLevels[skill];
         if (!level) return `<span class="skill card">${label}</span>`;
         return `<span class="skill card skill-rated skill-level-${level}" tabindex="0" aria-label="${label}: ${levelLabels[level]}">${label}<span class="skill-level-tip" aria-hidden="true">${levelLabels[level]}</span></span>`;
@@ -560,16 +568,16 @@ function renderSkillsSection(skills, ui) {
             description: currentLanguage === "fr"
                 ? "Développement logiciel, logique applicative et API"
                 : "Software development, application logic, and APIs",
-            skills: ["Python", "C++", "PHP", "Node.js", "Symfony", "FastAPI", "REST APIs"]
+            skills: ["Python", "C++", "PHP", "Node.js", "Symfony", "FastAPI", "REST APIs", "Sequelize"]
         },
         {
             id: "databases",
             icon: "fa-database",
             label: ui.skills?.groups?.databases || commonLabels.databases,
             description: currentLanguage === "fr"
-                ? "Langage SQL, bases relationnelles et plateformes de données"
-                : "SQL, relational databases, and data platforms",
-            skills: ["SQL", "PostgreSQL", "MySQL", "MariaDB", "Supabase"]
+                ? "SQL et NoSQL, bases relationnelles et non relationnelles"
+                : "SQL and NoSQL, relational and non-relational databases",
+            skills: ["SQL", "NoSQL", "PostgreSQL", "MySQL", "MariaDB", "Supabase", "MongoDB", "JSON", "phpMyAdmin", "PL/SQL"]
         },
         {
             id: "ai",
@@ -578,7 +586,7 @@ function renderSkillsSection(skills, ui) {
             description: currentLanguage === "fr"
                 ? "Intégration de modèles IA, pipelines RAG et outils de données"
                 : "AI model integration, RAG pipelines, and data tools",
-            skills: ["Python", "AI API Integration", "Hugging Face", "OpenRouter", "Scikit-learn", "Google Colab", "RAG Pipelines", "LLM APIs", "LLM orchestration", "Advanced AI agents"]
+            skills: ["Python", "AI API Integration", "Hugging Face", "OpenRouter", "Scikit-learn", "Google Colab", "RAG Pipelines", "LLM APIs", "LLM orchestration", "Advanced AI agents", "LangChain", "pgvector"]
         },
         {
             id: "devops",
@@ -596,7 +604,7 @@ function renderSkillsSection(skills, ui) {
             description: currentLanguage === "fr"
                 ? "Gestion de versions, éditeurs, modélisation et tests navigateur"
                 : "Version control, editors, modeling, and browser testing",
-            skills: ["Git", "GitHub", "Visual Studio Code", "Qt Creator", "UML", "Playwright"]
+            skills: ["Git", "GitHub", "Visual Studio Code", "Qt Creator", "UML", "Playwright", "Unit testing", "PHPUnit", "Agile"]
         },
         {
             id: "mindset",
@@ -612,6 +620,64 @@ function renderSkillsSection(skills, ui) {
         ...group,
         skills: group.skills.filter((skill) => skillLookup.has(skill))
     })).filter((group) => group.skills.length > 0);
+
+    const fr = currentLanguage === "fr";
+    const row = (labelFr, labelEn, items, leadSkills = [], caption = "") => ({
+        label: fr ? labelFr : labelEn, items, leadSkills, caption
+    });
+    const skillRows = {
+        frontend: [
+            row("Langages", "Languages", ["HTML/CSS", "JavaScript", "TypeScript", "Dart"]),
+            row("Frameworks", "Frameworks", ["React", "Angular", "Flutter"]),
+            row("Design", "Design", ["UI/UX"])
+        ],
+        backend: [
+            row("Langages", "Languages", ["Python", "C++", "PHP"]),
+            row("Environnement", "Runtime", ["Node.js"]),
+            row("Accès aux données", "Data Access", ["Sequelize"]),
+            row("Frameworks & API", "Frameworks & APIs", ["Symfony", "FastAPI", "REST APIs"])
+        ],
+        databases: [
+            row("SQL", "SQL", ["PostgreSQL", "MySQL", "MariaDB", "Supabase"]),
+            row("NoSQL", "NoSQL", ["MongoDB", "JSON"]),
+            row("Administration", "Administration", ["phpMyAdmin"]),
+            row("Scripts SQL", "SQL Scripting", ["PL/SQL"])
+        ],
+        ai: [
+            row("Langage", "Language", ["Python"]),
+            row("API & modèles", "APIs & Models", ["LLM APIs", "OpenRouter", "Hugging Face", "AI API Integration"]),
+            row("IA & données", "AI & Data", ["Scikit-learn", "Google Colab"]),
+            row("RAG", "RAG", ["RAG Pipelines", "LangChain", "pgvector"]),
+            row("Architecture IA", "AI Architecture", ["LLM orchestration", "Advanced AI agents"])
+        ],
+        devops: [
+            row("Système & scripts", "System & Scripting", ["Linux", "Bash"]),
+            row("Automatisation", "Automation", ["Docker", "CI/CD"]),
+            row("Cloud & hébergement", "Cloud & Hosting", ["Cloud deployment", "Cloudflare", "Oracle Cloud", "Netlify", "Render", "Hostinger"])
+        ],
+        systems: [
+            row("Gestion de versions", "Version Control", ["Git", "GitHub"]),
+            row("Éditeurs & IDE", "Editors & IDEs", ["Visual Studio Code", "Qt Creator"]),
+            row("Modélisation", "Modeling", ["UML"]),
+            row("Tests navigateur", "Browser Testing", ["Playwright"]),
+            row("Tests unitaires", "Unit Testing", ["Unit testing", "PHPUnit"]),
+            row("Gestion de projet", "Project Management", ["Agile"])
+        ]
+    };
+    const renderSkillRows = (group) => {
+        if (!skillRows[group.id]) return `<div class="skills-pills">${group.skills.map(renderSkill).join("")}</div>`;
+        return `<div class="competency-rows">${skillRows[group.id].map((entry) => ({
+            ...entry, items: entry.items.filter((skill) => group.skills.includes(skill))
+        })).filter((entry) => entry.items.length).map((entry) => `
+            <div class="competency-row">
+                <div class="competency-row-label">${entry.leadSkills.length ? entry.leadSkills.map(renderSkill).join("") : entry.label}</div>
+                <span class="competency-row-divider" aria-hidden="true"></span>
+                <div class="competency-row-content" role="group" aria-label="${entry.caption || entry.label}">
+                    ${entry.caption ? `<span class="competency-row-caption">${entry.caption}</span>` : ""}
+                    <div class="skills-pills">${entry.items.map(renderSkill).join("")}</div>
+                </div>
+            </div>`).join("")}</div>`;
+    };
 
     const firstGroupId = skillGroups[0]?.id || "";
 
@@ -644,9 +710,7 @@ function renderSkillsSection(skills, ui) {
                         </div>
                         ${group.id !== "mindset" ? legend : ""}
                     </div>
-                    <div class="skills-pills">
-                        ${group.skills.map(renderSkill).join("")}
-                    </div>
+                    ${renderSkillRows(group)}
                 </article>
             `).join("")}
         </div>

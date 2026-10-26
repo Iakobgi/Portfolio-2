@@ -24,15 +24,15 @@
   "skills": {
     "technical": [
       "HTML/CSS",
-      "PHP",
+      "PHP 8",
       "SQL",
-      "JavaScript",
+      "JavaScript ES6+",
       "C++",
       "Python",
       "GitHub",
       "Déploiement cloud",
       "Linux",
-      "UML",
+      "UML 2",
       "Qt Creator",
       "APIs LLM",
       "Hugging Face",
@@ -43,7 +43,10 @@
       "Hostinger",
       "Visual Studio Code",
       "OpenRouter",
-      "Scikit-learn"
+      "Scikit-learn",
+      "NoSQL",
+      "JSON",
+      "phpMyAdmin"
     ],
     "learning": [
       "CI/CD",
@@ -54,7 +57,7 @@
       "Angular",
       "Node.js",
       "Flutter",
-      "Symfony",
+      "Symfony 7",
       "Pipelines RAG",
       "Docker",
       "API REST",
@@ -65,7 +68,15 @@
       "Cloudflare",
       "Oracle Cloud",
       "Render",
-      "Playwright"
+      "Playwright",
+      "MongoDB",
+      "LangChain",
+      "pgvector",
+      "Sequelize",
+      "PL/SQL",
+      "PHPUnit 10",
+      "Tests unitaires",
+      "Agile"
     ],
     "soft": [
       "Autonome",

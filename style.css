@@ -2849,3 +2849,18 @@ html[data-theme="light"] .card-filename {
 html[data-theme="light"] .browser-url {
   background: rgba(75, 85, 99, 0.06);
 }
+
+/* Labeled competency rows: category, divider, and the associated skills. */
+.competency-rows { display: flex; flex-direction: column; gap: 22px; }
+.competency-row { display: grid; grid-template-columns: 155px 1px minmax(0, 1fr); align-items: center; gap: 22px; }
+.competency-row-label { font: 0.73rem/1.6 var(--font-mono); color: var(--text-muted); overflow-wrap: anywhere; }
+.competency-row .skill.card { margin-top: 0; }
+.competency-row-divider { align-self: stretch; min-height: 32px; background: var(--border-strong); }
+.competency-row-content { min-width: 0; }
+.competency-row-caption { display: block; margin-bottom: 10px; color: var(--text-muted); font: 0.7rem/1.6 var(--font-mono); }
+@media (max-width: 600px) {
+  .competency-rows { gap: 24px; }
+  .competency-row { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .competency-row-divider { min-height: 0; height: 1px; }
+  .competency-row .skills-pills { justify-content: flex-start; }
+}
