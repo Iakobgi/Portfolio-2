@@ -496,29 +496,10 @@ function renderSkillsSection(skills, ui) {
     ].map((skill) => [skillAliases[skill] || skill, skill]));
 
     // Explicit self-assessments; skills without a supplied level remain neutral.
-    const skillLevels = {
-        "LangChain": "beginner", "pgvector": "beginner", "Sequelize": "beginner",
-        "PL/SQL": "beginner", "PHPUnit": "beginner", "Unit testing": "beginner", "Agile": "beginner",
-        "PostgreSQL": "practicing", "Supabase": "practicing",
-        "Cloudflare": "practicing", "Oracle Cloud": "practicing", "Render": "practicing",
-        "MySQL": "familiar", "MariaDB": "familiar", "Netlify": "familiar",
-        "Hostinger": "familiar", "Visual Studio Code": "familiar",
-        "OpenRouter": "familiar", "Scikit-learn": "familiar", "Playwright": "beginner",
-        "PHP": "familiar", "JavaScript": "familiar", "GitHub": "familiar",
-        "Cloud deployment": "familiar", "Linux": "familiar", "UML": "familiar",
-        "LLM APIs": "familiar", "Hugging Face": "familiar",
-        "HTML/CSS": "confident", "phpMyAdmin": "familiar", "MongoDB": "beginner", "JSON": "familiar", "C++": "confident",
-        "Python": "confident", "Qt Creator": "confident",
-        "UI/UX": "familiar", "TypeScript": "practicing",
-        "React": "practicing", "Node.js": "practicing", "RAG Pipelines": "practicing",
-        "CI/CD": "practicing", "REST APIs": "practicing", "FastAPI": "practicing",
-        "Git": "practicing", "Bash": "practicing",
-        "Docker": "practicing", "Dart": "beginner", "Flutter": "beginner",
-        "Symfony": "beginner", "Angular": "beginner"
-    };
-    const levelLabels = currentLanguage === "fr"
-        ? { beginner: "En apprentissage · Débutant", practicing: "En apprentissage · Quelques bases", familiar: "Acquis · À l’aise avec les bases", confident: "Acquis · Bonne maîtrise" }
-        : { beginner: "Learning · Beginner", practicing: "Learning · Some foundations", familiar: "Known · Familiar with the basics", confident: "Known · Confident" };
+    const skillLevels = Object.fromEntries(
+        Object.entries(skills.levels || {}).map(([skill, level]) => [skillAliases[skill] || skill, level])
+    );
+    const levelLabels = skills.levelDescriptions;
     const legend = `
         <div class="skills-legend" aria-label="${currentLanguage === "fr" ? "Légende des niveaux" : "Skill level legend"}">
             <span class="skills-legend-item"><span class="skills-legend-swatches" aria-hidden="true"><i class="skill-swatch skill-level-practicing"></i><i class="skill-swatch skill-level-beginner"></i></span>${currentLanguage === "fr" ? "En apprentissage" : "Learning"}</span>
