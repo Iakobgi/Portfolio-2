@@ -321,12 +321,12 @@
       "liveDemo": "Démo en direct"
     },
     "about": {
-      "eyebrow": "À propos",
-      "title": "Créer des expériences numériques propres",
-      "subtitle": "Présentation rapide",
+      "title": "À propos de moi",
       "who": "Qui je suis",
       "looking": "Ce que je recherche",
-      "interests": "Centres d’intérêt"
+      "interests": "Centres d’intérêt",
+      "eyebrow": "Présentation",
+      "subtitle": "Mon profil"
     },
     "skills": {
       "eyebrow": "Compétences",

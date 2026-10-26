@@ -321,12 +321,12 @@
       "liveDemo": "Live Demo"
     },
     "about": {
-      "eyebrow": "About",
-      "title": "Building clean digital experiences",
-      "subtitle": "A quick introduction",
+      "title": "About me",
       "who": "Who I Am",
       "looking": "What I’m Looking For",
-      "interests": "Hobbies & Interests"
+      "interests": "Hobbies & Interests",
+      "eyebrow": "Introduction",
+      "subtitle": "My profile"
     },
     "skills": {
       "eyebrow": "Skills",
