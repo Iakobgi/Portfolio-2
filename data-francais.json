@@ -226,7 +226,7 @@
     {
       "name": "Analyseur de Navigation Web",
       "shortDescription": "Inspection des cookies et des requêtes, avec blocage activable des traceurs connus.",
-      "description": "Extension Chrome Manifest V3 pour inspecter les requêtes de l’onglet courant et ses cookies. Un interrupteur permet de bloquer les requêtes tierces correspondant à une liste embarquée de 15 domaines de traceurs connus. Le choix est conservé après redémarrage. Les domaines tiers inconnus ne sont pas automatiquement considérés comme des traceurs ; la liste ne couvre pas toutes les techniques de suivi.",
+      "description": "Extension Chrome Manifest V3 pour inspecter les requêtes de l’onglet courant et ses cookies. Un interrupteur permet de bloquer les requêtes tierces correspondant à une liste embarquée de 15 domaines de traceurs connus. Le choix est conservé après redémarrage. Le blocage repose sur une liste de domaines de traceurs connus et ne garantit pas une protection contre toutes les formes de suivi en ligne.",
       "technologies": [
         "JavaScript",
         "HTML",
@@ -506,7 +506,7 @@
       "title": "Extension Chrome - Analyseur de Navigation Web",
       "subtitle": "Analyse de navigation et blocage des traceurs connus",
       "descriptionTitle": "Description",
-      "description": "Extension Chrome Manifest V3 pour inspecter les requêtes de l’onglet courant et ses cookies. Un interrupteur permet de bloquer les requêtes tierces correspondant à une liste embarquée de 15 domaines de traceurs connus. Le choix est conservé après redémarrage. Les domaines tiers inconnus ne sont pas automatiquement considérés comme des traceurs ; la liste ne couvre pas toutes les techniques de suivi.",
+      "description": "Extension Chrome Manifest V3 pour inspecter les requêtes de l’onglet courant et ses cookies. Un interrupteur permet de bloquer les requêtes tierces correspondant à une liste embarquée de 15 domaines de traceurs connus. Le choix est conservé après redémarrage. Le blocage repose sur une liste de domaines de traceurs connus et ne garantit pas une protection contre toutes les formes de suivi en ligne.",
       "technologiesTitle": "Technologies",
       "technologies": "JavaScript, HTML, CSS, Chrome Extension APIs, Manifest V3, declarativeNetRequest, Chrome Storage API",
       "learnedTitle": "Ce que j’ai appris",

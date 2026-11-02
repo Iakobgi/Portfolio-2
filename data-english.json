@@ -226,7 +226,7 @@
     {
       "name": "Web Browsing Analyser",
       "shortDescription": "Inspect requests and cookies, with optional blocking of known trackers.",
-      "description": "A Manifest V3 Chrome extension for inspecting current-tab requests and cookies. A toggle blocks third-party requests matching a bundled list of 15 known tracker domains, with the setting preserved across restarts. Unknown third-party domains are not automatically labeled trackers; the list does not cover every tracking technique.",
+      "description": "A Manifest V3 Chrome extension for inspecting current-tab requests and cookies. A toggle blocks third-party requests matching a bundled list of 15 known tracker domains, with the setting preserved across restarts. Blocking applies only to tracker domains included in this list and does not guarantee protection against every form of online tracking.",
       "technologies": [
         "JavaScript",
         "HTML",
@@ -506,7 +506,7 @@
       "title": "Chrome Extension - Web Browsing Analyser",
       "subtitle": "Browsing inspection and known-tracker blocking",
       "descriptionTitle": "Description",
-      "description": "A Manifest V3 Chrome extension for inspecting current-tab requests and cookies. A toggle blocks third-party requests matching a bundled list of 15 known tracker domains, with the setting preserved across restarts. Unknown third-party domains are not automatically labeled trackers; the list does not cover every tracking technique.",
+      "description": "A Manifest V3 Chrome extension for inspecting current-tab requests and cookies. A toggle blocks third-party requests matching a bundled list of 15 known tracker domains, with the setting preserved across restarts. Blocking applies only to tracker domains included in this list and does not guarantee protection against every form of online tracking.",
       "technologiesTitle": "Technologies",
       "technologies": "JavaScript, HTML, CSS, Chrome Extension APIs, Manifest V3, declarativeNetRequest, Chrome Storage API",
       "learnedTitle": "What I learned",
