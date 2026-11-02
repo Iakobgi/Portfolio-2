@@ -457,7 +457,9 @@ function renderContactJSON(personal, apprenticeship) {
         ["role", personal.title],
         ["location", personal.location],
         ["email", personal.email],
-        ["availability", apprenticeship.availability]
+        ["availability", currentLanguage === "fr"
+            ? apprenticeship.availability.replace("de début novembre", "de novembre")
+            : apprenticeship.availability]
     ];
 
     const body = rows
