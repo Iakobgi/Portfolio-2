@@ -1,1 +1,1 @@
-Force upload the new favicon.svg (same name, new icon)
+Updated projects section
