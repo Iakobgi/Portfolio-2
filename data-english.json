@@ -249,7 +249,7 @@
     {
       "name": "Portfolio AI Assistant",
       "shortDescription": "An interactive AI assistant for exploring my profile and projects.",
-      "description": "An AI assistant integrated into the portfolio to answer questions about my profile, skills, projects and apprenticeship search. It connects an AI API with JSON profile data through a bilingual chat interface.",
+      "description": "An AI assistant integrated into the portfolio to answer questions about my profile, skills, projects and apprenticeship search. It uses JSON profile data through a bilingual chat interface. The backend integrates three AI providers: Groq, Gemini and OpenRouter. When a provider hits a rate limit or becomes unavailable, the assistant automatically falls back to the next provider to reduce interruptions.",
       "technologies": [
         "JavaScript",
         "TypeScript",
@@ -519,7 +519,7 @@
       "title": "Portfolio AI Assistant",
       "subtitle": "A conversational assistant integrated into the portfolio",
       "descriptionTitle": "Description",
-      "description": "An AI assistant integrated into the portfolio to answer questions about my profile, skills, projects and apprenticeship search. It connects an AI API with JSON profile data through a bilingual chat interface.",
+      "description": "An AI assistant integrated into the portfolio to answer questions about my profile, skills, projects and apprenticeship search. It uses JSON profile data through a bilingual chat interface. The backend integrates three AI providers: Groq, Gemini and OpenRouter. When a provider hits a rate limit or becomes unavailable, the assistant automatically falls back to the next provider to reduce interruptions.",
       "technologiesTitle": "Technologies",
       "technologies": "JavaScript, TypeScript, HTML, CSS, JSON, Cloudflare Workers, Groq API, Gemini API, OpenRouter API",
       "learnedTitle": "What I learned",

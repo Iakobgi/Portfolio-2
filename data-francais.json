@@ -249,7 +249,7 @@
     {
       "name": "Assistant IA du portfolio",
       "shortDescription": "Un assistant IA interactif pour découvrir mon profil et mes projets.",
-      "description": "Assistant IA intégré au portfolio pour répondre aux questions sur mon profil, mes compétences, mes projets et ma recherche d’alternance. Il utilise une API IA et des données de profil au format JSON dans une interface de conversation bilingue.",
+      "description": "Assistant IA intégré au portfolio pour répondre aux questions sur mon profil, mes compétences, mes projets et ma recherche d’alternance. Il utilise des données de profil au format JSON dans une interface de conversation bilingue. Le backend intègre trois fournisseurs IA : Groq, Gemini et OpenRouter. Lorsqu’un fournisseur atteint une limite de requêtes ou devient indisponible, l’assistant bascule automatiquement vers le suivant pour limiter les interruptions.",
       "technologies": [
         "JavaScript",
         "TypeScript",
@@ -519,7 +519,7 @@
       "title": "Assistant IA du portfolio",
       "subtitle": "Un assistant conversationnel intégré au portfolio",
       "descriptionTitle": "Description",
-      "description": "Assistant IA intégré au portfolio pour répondre aux questions sur mon profil, mes compétences, mes projets et ma recherche d’alternance. Il utilise une API IA et des données de profil au format JSON dans une interface de conversation bilingue.",
+      "description": "Assistant IA intégré au portfolio pour répondre aux questions sur mon profil, mes compétences, mes projets et ma recherche d’alternance. Il utilise des données de profil au format JSON dans une interface de conversation bilingue. Le backend intègre trois fournisseurs IA : Groq, Gemini et OpenRouter. Lorsqu’un fournisseur atteint une limite de requêtes ou devient indisponible, l’assistant bascule automatiquement vers le suivant pour limiter les interruptions.",
       "technologiesTitle": "Technologies",
       "technologies": "JavaScript, TypeScript, HTML, CSS, JSON, Cloudflare Workers, Groq API, Gemini API, OpenRouter API",
       "learnedTitle": "Ce que j’ai appris",
